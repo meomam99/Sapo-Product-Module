@@ -16,7 +16,7 @@ class ProductHomeViewController: UIViewController {
     @IBOutlet weak var checkProductView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+   //     navigationController?.navigationBar.isHidden = true
         addProductView.layer.cornerRadius = 12
 
     }

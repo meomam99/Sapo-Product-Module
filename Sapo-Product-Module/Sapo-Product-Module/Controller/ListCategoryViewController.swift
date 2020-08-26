@@ -31,8 +31,11 @@ class ListCategoryViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.accessoryView?.isHidden = true
         if cell.textLabel?.text == categorySelected.name {
-            cell.textLabel?.backgroundColor = .systemGray5
+            cell.imageView?.image = UIImage(systemName: "checkmark")
+            cell.accessoryView?.isHidden = false
+            
       
         }
     }
@@ -56,7 +59,7 @@ class ListCategoryViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func setup() {
-       
+        tbviewListCategory.tableFooterView = UIView(frame: .zero)
         tbviewListCategory.delegate = self
     }
     

@@ -23,7 +23,15 @@
 		0405755E24DB9CC80089E166 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405755D24DB9CC80089E166 /* NetworkService.swift */; };
 		0405756024DBB3DD0089E166 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405755F24DBB3DD0089E166 /* ProductDetailViewController.swift */; };
 		0405756324DC06D20089E166 /* ProductVariantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405756224DC06D20089E166 /* ProductVariantDetailViewController.swift */; };
+		041717A524EFA7560052D927 /* ListVariantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041717A424EFA7560052D927 /* ListVariantTableViewController.swift */; };
+		041F96CE24F3617C00F393E9 /* SetImageForVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F96CD24F3617C00F393E9 /* SetImageForVariantViewController.swift */; };
+		041F96D024F361A300F393E9 /* AddVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F96CF24F361A300F393E9 /* AddVariantViewController.swift */; };
 		04403D4624E6815700DC18AC /* ListCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04403D4524E6815600DC18AC /* ListCategoryViewController.swift */; };
+		0448949E24F50D1E00E47E98 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448949D24F50D1E00E47E98 /* ImagePicker.swift */; };
+		045CF14024ED2C7F0039F817 /* ProductDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF13F24ED2C7F0039F817 /* ProductDescriptionViewController.swift */; };
+		045CF14324EEAF410039F817 /* ProductMoreInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF14224EEAF410039F817 /* ProductMoreInformationView.swift */; };
+		045CF14524EF63170039F817 /* ProductNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF14424EF63170039F817 /* ProductNameView.swift */; };
+		04616E2B24EFBCFE009DD72A /* ProductInventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04616E2A24EFBCFE009DD72A /* ProductInventoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +53,15 @@
 		0405755D24DB9CC80089E166 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0405755F24DBB3DD0089E166 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		0405756224DC06D20089E166 /* ProductVariantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVariantDetailViewController.swift; sourceTree = "<group>"; };
+		041717A424EFA7560052D927 /* ListVariantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVariantTableViewController.swift; sourceTree = "<group>"; };
+		041F96CD24F3617C00F393E9 /* SetImageForVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetImageForVariantViewController.swift; sourceTree = "<group>"; };
+		041F96CF24F361A300F393E9 /* AddVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVariantViewController.swift; sourceTree = "<group>"; };
 		04403D4524E6815600DC18AC /* ListCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoryViewController.swift; sourceTree = "<group>"; };
+		0448949D24F50D1E00E47E98 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		045CF13F24ED2C7F0039F817 /* ProductDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionViewController.swift; sourceTree = "<group>"; };
+		045CF14224EEAF410039F817 /* ProductMoreInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMoreInformationView.swift; sourceTree = "<group>"; };
+		045CF14424EF63170039F817 /* ProductNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNameView.swift; sourceTree = "<group>"; };
+		04616E2A24EFBCFE009DD72A /* ProductInventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInventoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,7 @@
 		0405753824DA987B0089E166 /* Sapo-Product-Module */ = {
 			isa = PBXGroup;
 			children = (
+				045CF14124EEAF1C0039F817 /* View */,
 				0405756124DC06760089E166 /* Controller */,
 				0405755A24DAB8DE0089E166 /* Utilities */,
 				0405755724DAB1FD0089E166 /* Model */,
@@ -103,6 +120,7 @@
 		0405755A24DAB8DE0089E166 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0448949D24F50D1E00E47E98 /* ImagePicker.swift */,
 				0405755B24DAB8FC0089E166 /* Utilities.swift */,
 				0405755D24DB9CC80089E166 /* NetworkService.swift */,
 			);
@@ -120,8 +138,22 @@
 				0405755F24DBB3DD0089E166 /* ProductDetailViewController.swift */,
 				0405756224DC06D20089E166 /* ProductVariantDetailViewController.swift */,
 				04403D4524E6815600DC18AC /* ListCategoryViewController.swift */,
+				045CF13F24ED2C7F0039F817 /* ProductDescriptionViewController.swift */,
+				041F96CD24F3617C00F393E9 /* SetImageForVariantViewController.swift */,
+				041F96CF24F361A300F393E9 /* AddVariantViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		045CF14124EEAF1C0039F817 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				045CF14224EEAF410039F817 /* ProductMoreInformationView.swift */,
+				045CF14424EF63170039F817 /* ProductNameView.swift */,
+				041717A424EFA7560052D927 /* ListVariantTableViewController.swift */,
+				04616E2A24EFBCFE009DD72A /* ProductInventoryView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,20 +227,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				045CF14324EEAF410039F817 /* ProductMoreInformationView.swift in Sources */,
 				0405755E24DB9CC80089E166 /* NetworkService.swift in Sources */,
 				0405755924DAB2190089E166 /* Model.swift in Sources */,
 				0405753E24DA987B0089E166 /* ViewController.swift in Sources */,
 				0405753A24DA987B0089E166 /* AppDelegate.swift in Sources */,
 				0405755624DAAA510089E166 /* ProductCheckViewController.swift in Sources */,
 				0405756024DBB3DD0089E166 /* ProductDetailViewController.swift in Sources */,
+				0448949E24F50D1E00E47E98 /* ImagePicker.swift in Sources */,
 				0405755424DAAA420089E166 /* ProductImportViewController.swift in Sources */,
 				0405755024DA9E080089E166 /* ProductListViewController.swift in Sources */,
+				041717A524EFA7560052D927 /* ListVariantTableViewController.swift in Sources */,
 				0405753C24DA987B0089E166 /* SceneDelegate.swift in Sources */,
 				0405755224DA9EA50089E166 /* ProductAddViewController.swift in Sources */,
+				04616E2B24EFBCFE009DD72A /* ProductInventoryView.swift in Sources */,
 				0405755C24DAB8FC0089E166 /* Utilities.swift in Sources */,
 				0405756324DC06D20089E166 /* ProductVariantDetailViewController.swift in Sources */,
 				04403D4624E6815700DC18AC /* ListCategoryViewController.swift in Sources */,
+				045CF14024ED2C7F0039F817 /* ProductDescriptionViewController.swift in Sources */,
+				045CF14524EF63170039F817 /* ProductNameView.swift in Sources */,
+				041F96D024F361A300F393E9 /* AddVariantViewController.swift in Sources */,
 				0405754E24DA999D0089E166 /* ProductHomeViewController.swift in Sources */,
+				041F96CE24F3617C00F393E9 /* SetImageForVariantViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
