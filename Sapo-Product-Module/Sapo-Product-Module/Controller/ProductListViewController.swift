@@ -36,6 +36,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     var variants : [Variant] = []
     var categorySelected:Category = Category()
     var loadingData = false
+    var isSearching = false
     var viewMode = ProductListViewMode(true)
     var total = 0
     var page = 1
@@ -80,6 +81,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 >= tableView.numberOfRows(inSection: 0) {
             if !loadingData && indexPath.row + 1 < self.total {
+                
                 loadMore()
             }
         }
@@ -113,9 +115,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         btnCancelSearch.isHidden = false
     }
    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        setData()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,6 +154,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func updateTableView() {
         loadingData = false
+        tbProductList.isHidden = false
         lbTotal.text = "\(total)" + viewMode.lbTotal
         tbProductList.dataSource = self
         tbProductList.delegate = self
@@ -162,6 +163,8 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func setData() {
         page = 1
+        total = 0
+        tbProductList.isHidden = true
         NetworkService.shared.setPage(page: page)
         NetworkService.shared.setKeyword(key: txtSearch.text)
         updateData()
@@ -184,7 +187,6 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func getProduct() {
-        
         NetworkService.shared.getProduct(category_id: categorySelected.id,onSucess: { (result) in
             if self.loadingData {
                 self.products.append(contentsOf: result.products)
@@ -202,7 +204,6 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func getVariant() {
         NetworkService.shared.getVariant(category_id: categorySelected.id, onSucess: { (result) in
-            self.variants.append(contentsOf: result.variants)
             if self.loadingData {
                  self.variants.append(contentsOf: result.variants)
              } else {
@@ -238,14 +239,17 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func search(_ sender: UITextField) {
-           // setData()
+        isSearching = true
     }
     
     @IBAction func cancelSearch(_ sender: Any) {
         view.endEditing(true)
         btnCancelSearch.isHidden = true
         txtSearch.text = nil
-        setData()
+        if isSearching {
+            setData()
+            isSearching = false
+        }
     }
     
 }
@@ -334,7 +338,6 @@ class VariantListCell: UITableViewCell {
         lbSKU.text = "SKU: \(variant.sku)"
 
     }
-    
     
     override func prepareForReuse() {
         img.image = nil

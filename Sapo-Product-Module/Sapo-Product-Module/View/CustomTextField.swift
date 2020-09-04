@@ -24,7 +24,17 @@ class CustomTextField: UITextField {
         self.addTarget(self, action: #selector(self.updateFloatingLabel), for: .editingChanged)
     }
     
+    func addDoneButton() {
+        let tb = UIToolbar()
+        tb.sizeToFit()
+        let doneBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneClick))
+        tb.items = [doneBtn]
+        self.inputAccessoryView = tb
+    }
     
+    @objc func doneClick() {
+        self.resignFirstResponder()
+    }
     
     func setupView() {
         let bottomLine = CALayer()

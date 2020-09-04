@@ -95,6 +95,12 @@ class AddVariantViewController: UIViewController, UITextFieldDelegate {
         view1.layer.setBorderSilver()
         view2.layer.setBorderSilver()
         view3.layer.setBorderSilver()
+        txtCostPrice.addDoneButton()
+        txtImportPrice.addDoneButton()
+        txtWeight.addDoneButton()
+        txtWholePrice.addDoneButton()
+        txtRetailPrice.addDoneButton()
+        txtOnHand.addDoneButton()
     }
     
 

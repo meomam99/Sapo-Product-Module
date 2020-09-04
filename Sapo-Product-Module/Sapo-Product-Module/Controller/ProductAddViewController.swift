@@ -74,8 +74,9 @@ class ProductAddViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+ 
     }
-    
+
     func setupView() {
         if editMode == .edit {
             self.title = "Sửa sản phẩm"
@@ -88,7 +89,12 @@ class ProductAddViewController: UIViewController, UITextFieldDelegate {
             self.title = "Thêm sản phẩm"
             view6.isHidden = true
         }
-        
+        txtCostPrice.addDoneButton()
+        txtImportPrice.addDoneButton()
+        txtWeight.addDoneButton()
+        txtWhloPrice.addDoneButton()
+        txtRetailPrice.addDoneButton()
+        txtOnhand.addDoneButton()
         txtName.delegate = self
         txtBarcode.delegate = self
         txtSKU.delegate = self
