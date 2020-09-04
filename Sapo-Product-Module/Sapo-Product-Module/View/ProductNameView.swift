@@ -41,15 +41,7 @@ class ProductNameView: UIView {
     
     
     func setData(product: Product ) {
-        
-        if product.variants.count == 1 {
-            let variant = product.variants[0]
-            
-            setData(variant: variant)
-        } else {
-            
-            viewMore.isHidden = true
-        }
+        viewMore.isHidden = true
         lbName.text = product.name
     }
     
@@ -62,7 +54,7 @@ class ProductNameView: UIView {
         lbUnit.text = variant.unit ?? ""
     }
     
-    func showOption(variant: Variant) {
+    func showOption(variant: Variant, option1: String?, option2: String?, option3: String?) {
         
         viewOption1.isHidden = true
         viewOption2.isHidden = true
@@ -73,18 +65,21 @@ class ProductNameView: UIView {
         }
         
         viewOption1.isHidden = false
+        lbOption1Key.text = option1
         lbOption1Value.text = opt1
         
         guard let opt2 = variant.opt2 else {
             return
         }
         viewOption2.isHidden = false
+        lbOption2Key.text = option2
         lbOption2Value.text = opt2
         
         guard let opt3 = variant.opt3 else {
             return
         }
         viewOption3.isHidden = false
+        lbOption3key.text = option3
         lbOption3Value.text = opt3
         
     }

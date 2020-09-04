@@ -12,6 +12,8 @@ import UIKit
 extension UIImageView {
     func loadImageByURL(urlString: String) {
     
+        self.image = UIImage(named: "noimage")
+        
         guard let url = URL(string: urlString) else {
             return
         }
@@ -33,6 +35,7 @@ extension CALayer {
         self.cornerRadius = 8
         self.borderColor = .init(srgbRed: 214/255, green: 214/255, blue: 214/255, alpha: 1)
         self.borderWidth = 0.5
+        self.masksToBounds = true
 
     }
     
@@ -54,7 +57,7 @@ extension CALayer {
 extension UITextField {
     func AddBottomLine() {
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: self.frame.height + 5, width: (self.center.x - self.frame.origin.x)*2, height: 1)
+        bottomLine.frame = CGRect(x: 0, y: self.frame.height , width: (self.center.x - self.frame.origin.x)*2, height: 1)
 
         bottomLine.backgroundColor = .init(srgbRed: 192/255, green: 192/255, blue: 192/255, alpha: 1)
 
@@ -64,7 +67,7 @@ extension UITextField {
 }
 
 extension UIViewController {
-    func showMessage(flag: Bool, mess: String, onCompletion:@escaping () -> Void ) {
+    func showMessage(flag: Bool,title: String, mess: String?, onCompletion:@escaping () -> Void ) {
         var style:UIAlertAction.Style
         if flag {
             style = .cancel
@@ -72,7 +75,7 @@ extension UIViewController {
             style = .destructive
         }
 
-        let alert = UIAlertController(title: mess, message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: mess, preferredStyle: .alert)
         
         let btnOK = UIAlertAction(title: "OK", style: style) { (btn) in
             onCompletion()
@@ -80,4 +83,37 @@ extension UIViewController {
         alert.addAction(btnOK)
         self.present(alert, animated: true)
     }
+    
+    func showVerify(title: String, mess: String?, onCompletion:@escaping () -> Void ) {
+        let alert = UIAlertController(title: title, message: mess, preferredStyle: .alert)
+        
+        let btnCancel = UIAlertAction(title: "Cancel", style: .cancel) { (btn) in
+            
+        }
+        let btnOK = UIAlertAction(title: "OK", style: .default) { (btn) in
+            onCompletion()
+        }
+        alert.addAction(btnCancel)
+        alert.addAction(btnOK)
+        self.present(alert, animated: true)
+    }
+    
+    func showImage(images: [Image], index: Int, delegate: UpdateImageDelegate?) {
+        let imgView: ImageViewController = storyboard?.instantiateViewController(withIdentifier: "imageView") as! ImageViewController
+        imgView.delegate = delegate
+        imgView.images = images
+        imgView.index = index
+        imgView.modalPresentationStyle = .overFullScreen
+        self.present(imgView, animated: true)
+    }
+    
+}
+
+extension String {
+    func toArray() -> [String] {
+        let parts = self.components(separatedBy: ",")
+        return parts
+    }
+    
+    
 }

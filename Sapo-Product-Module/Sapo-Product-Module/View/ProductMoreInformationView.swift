@@ -46,17 +46,14 @@ class ProductMoreInformationView: UIView {
         lbCategory.text = product.getCategory()
         lbBrand.text = product.getBrand()
         lbDesc.text = product.getDescription()
-        if product.variants.count == 1 {
-            viewSellable.isHidden = false
-            viewSellable.setData(sellable: product.variants[0].sellable)
-        }
+        viewSellable.isHidden = true
         
     }
     
     @IBAction func showMoreInfo(_ sender: Any) {
-        var img = "chevron.up"
+        var img = "chevron.down"
         if viewMore.isHidden {
-            img = "chevron.down"
+            img = "chevron.up"
         }
 
         self.btnShowMoreInfo.setImage(UIImage(systemName: img), for: .normal)

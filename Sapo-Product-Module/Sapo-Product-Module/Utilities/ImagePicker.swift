@@ -11,6 +11,7 @@ protocol ImagePickerDelegate: class {
 }
 
 import UIKit
+import AVKit
 
 open class ImagePicker: NSObject {
     private let pickerController: UIImagePickerController
@@ -31,10 +32,10 @@ open class ImagePicker: NSObject {
         guard UIImagePickerController.isSourceTypeAvailable(type) else {
             return nil
         }
+        
         return UIAlertAction(title: title, style: .default) { [unowned self]_ in
             self.pickerController.sourceType = type
             self.presentationController?.present(self.pickerController, animated: true)
-        //    self.presentationController?.navigationController?.pushViewController(self.pickerController, animated: true)
         }
     }
     
@@ -67,6 +68,7 @@ open class ImagePicker: NSObject {
         self.delegate?.didSelect(image: image)
         
     }
+    
     
 }
 extension ImagePicker: UIImagePickerControllerDelegate {

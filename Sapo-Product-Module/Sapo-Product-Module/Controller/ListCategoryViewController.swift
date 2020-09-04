@@ -23,6 +23,7 @@ class ListCategoryViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if categorySelected.name != categories[indexPath.row].name {
             categorySelected = categories[indexPath.row]
+         
             delegate?.setCategory(category: categorySelected)
         }
         
@@ -31,12 +32,11 @@ class ListCategoryViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.accessoryView?.isHidden = true
+        
         if cell.textLabel?.text == categorySelected.name {
-            cell.imageView?.image = UIImage(systemName: "checkmark")
-            cell.accessoryView?.isHidden = false
-            
-      
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
     }
     
@@ -59,6 +59,7 @@ class ListCategoryViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func setup() {
+        self.title = "Danh mục"
         tbviewListCategory.tableFooterView = UIView(frame: .zero)
         tbviewListCategory.delegate = self
     }
@@ -77,10 +78,6 @@ class ListCategoryViewController: UIViewController, UITableViewDataSource, UITab
             debugPrint(err)
         }
     }
-
-
-    
-
 }
 
 protocol SelectCategory {

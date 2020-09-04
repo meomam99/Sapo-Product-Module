@@ -30,9 +30,9 @@ class ProductInventoryView: UIView {
     }
     
     func setData(variant: Variant) {
-        lbRetailPrice.text = variant.variant_retail_price.toString()
-        lbWholePrice.text = variant.variant_whole_price.toString()
-        lbImportPrice.text = variant.variant_import_price.toString()
+        lbRetailPrice.text = variant.getRetailPrice()
+        lbWholePrice.text = variant.getWholePrice()
+        lbImportPrice.text = variant.getImportPrice()
         lbOnHand.text = variant.inventories[0].on_hand.toString()
         if variant.taxable {
             imgTaxable.tintColor = .systemGreen

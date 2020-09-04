@@ -13,12 +13,12 @@ struct ProductListViewMode {
     init(_ mode: Bool) {
         if mode {
             isProductMode = true
-            img = "dial"
+            img = "square.stack.3d.up"
             title = "Sản phẩm"
             lbTotal = " sản phẩm"
         } else {
             isProductMode = false
-            img = "dial.fill"
+            img = "square.stack.3d.up.fill"
             title = "Quản lý kho"
             lbTotal = " phiên bản"
         }
@@ -30,17 +30,16 @@ struct ProductListViewMode {
     
 }
 
-class ProductListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProductListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     var products : [Product] = []
     var variants : [Variant] = []
     var categorySelected:Category = Category()
     var loadingData = false
     var viewMode = ProductListViewMode(true)
-    var isSearching = false
     var total = 0
     var page = 1
-    var limit = 20
+    let limit = 20
     
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbTotal: UILabel!
@@ -49,8 +48,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var btnSetting: UIButton!
     @IBOutlet weak var btnCancelSearch: UIButton!
     
-    @IBOutlet weak var txtSearch: UITextField!
-
+    @IBOutlet weak var txtSearch: LeftImageTextField!
     @IBOutlet weak var tbProductList: UITableView!
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -66,7 +64,6 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if(viewMode.isProductMode) {
            let cell:ProductListCell = tableView.dequeueReusableCell(withIdentifier: "product", for: indexPath) as! ProductListCell
             cell.setData(product: products[indexPath.row])
@@ -81,7 +78,6 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         if indexPath.row + 1 >= tableView.numberOfRows(inSection: 0) {
             if !loadingData && indexPath.row + 1 < self.total {
                 loadMore()
@@ -91,30 +87,40 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        guard let cell = tableView.cellForRow(at: indexPath) else {return}
+        cell.selectionStyle = .none
         if viewMode.isProductMode {
-          
-                let detailView: ProductDetailViewController = storyboard?.instantiateViewController(identifier: "productDetail") as! ProductDetailViewController
-                detailView.product = products[indexPath.row]
-                detailView.navigationController?.title = "Chi tiết sản phẩm"
-                navigationController?.pushViewController(detailView, animated: true)
-                return
+            let detailView: ProductDetailViewController = storyboard?.instantiateViewController(identifier: "productDetail") as! ProductDetailViewController
+            detailView.product_id = products[indexPath.row].id
+            detailView.delegate = self
 
+            navigationController?.pushViewController(detailView, animated: true)
         } else {
    
             let variantDetailView: ProductVariantDetailViewController = storyboard?.instantiateViewController(identifier: "productVariantDetail") as! ProductVariantDetailViewController
             variantDetailView.delegate = self
             variantDetailView.variant = variants[indexPath.row]
             navigationController?.pushViewController(variantDetailView, animated: true)
-            return
+            
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        setData()
+        textField.resignFirstResponder()
+        return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        btnCancelSearch.isHidden = false
+    }
+   
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        setData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setData()
-        navigationController?.navigationItem.backBarButtonItem?.image = UIImage(systemName: "arrow.left")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,20 +132,24 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func setupView() {
+        txtSearch.delegate = self
+        self.title = "Danh sách sản phẩm"
+        btnSelectMode.layer.cornerRadius = 20
+        btnSetting.layer.cornerRadius = 20
+        btnCancelSearch.layer.cornerRadius = 20
+        btnCancelSearch.layer.borderColor = UIColor.systemGray.cgColor
+        btnCancelSearch.layer.borderWidth = 1
+        txtSearch.layer.cornerRadius = 20
         tbProductList.tableFooterView = UIView(frame: .zero)
-        self.navigationController?.navigationBar.backItem?.backBarButtonItem?.title = ""
-        self.navigationController?.navigationBar.backItem?.backBarButtonItem?.image = UIImage(systemName: "lessthan")
-        self.navigationController?.navigationBar.topItem?.title = "Sản phẩm"
-        txtSearch.layer.cornerRadius = 15
+        
     }
     
     func updateView() {
 
         btnSelectMode.setImage(UIImage(systemName: viewMode.img), for: .normal)
         lbTitle.text = viewMode.title
+        btnSelectCategory.setTitle(categorySelected.name, for: .normal)
 
-        btnSelectCategory.titleLabel?.text = categorySelected.name
-        
     }
     
     func updateTableView() {
@@ -151,55 +161,60 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func setData() {
-        variants = []
-        products = []
         page = 1
         NetworkService.shared.setPage(page: page)
-        limit = 20
+        NetworkService.shared.setKeyword(key: txtSearch.text)
         updateData()
     }
     
     func updateData() {
-        NetworkService.shared.setCategory(category: categorySelected)
-        NetworkService.shared.setKeyword(key: txtSearch.text)
         updateView()
         if viewMode.isProductMode {
             getProduct()
         } else {
             getVariant()
         }
-        
     }
     
     func loadMore() {
-        self.loadingData = true
+        loadingData = true
         page += 1
         NetworkService.shared.setPage(page: page)
         updateData()
     }
     
     func getProduct() {
-        variants = []
-        NetworkService.shared.getProduct(onSucess: { (result) in
-            self.products.append(contentsOf: result.products)
+        
+        NetworkService.shared.getProduct(category_id: categorySelected.id,onSucess: { (result) in
+            if self.loadingData {
+                self.products.append(contentsOf: result.products)
+            } else {
+                self.products = result.products
+            }
+            
             self.total = result.metadata.total
             self.updateTableView()
         }) { (error) in
             debugPrint(error)
         }
-
+        
     }
     
     func getVariant() {
-        products = []
-        NetworkService.shared.getVariant(onSucess: { (result) in
+        NetworkService.shared.getVariant(category_id: categorySelected.id, onSucess: { (result) in
             self.variants.append(contentsOf: result.variants)
+            if self.loadingData {
+                 self.variants.append(contentsOf: result.variants)
+             } else {
+                 self.variants = result.variants
+             }
             self.total = result.metadata.total
             self.updateTableView()
         }) { (error) in
             debugPrint(error)
         }
     }
+    
     
     
     @IBAction func selectCategory(_ sender: Any) {
@@ -223,26 +238,17 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func search(_ sender: UITextField) {
-        btnCancelSearch.isHidden = false
-        isSearching = true
-        updateData()
-    }
-    
-  
-    @IBAction func editingBegin(_ sender: UITextField) {
-        btnCancelSearch.isHidden = false
+           // setData()
     }
     
     @IBAction func cancelSearch(_ sender: Any) {
         view.endEditing(true)
         btnCancelSearch.isHidden = true
-        isSearching = false
         txtSearch.text = nil
-        updateData()
+        setData()
     }
     
 }
-
 
 extension ProductListViewController: SelectCategory {
     func setCategory(category: Category) {
@@ -250,18 +256,11 @@ extension ProductListViewController: SelectCategory {
         self.setData()
     }
 }
-extension ProductListViewController: UpdateProduct {
-    func DeleteVariant() {
+extension ProductListViewController: UpdateProductDelegate {
+    func UpdateProduct() {
         self.setData()
     }
-    
-    func UpdateVariant() {
-        
-    }
-    
-    
 }
-
 
 // cell for tableview in Product mode
 class ProductListCell: UITableViewCell {
@@ -276,13 +275,15 @@ class ProductListCell: UITableViewCell {
     }
     
     func setupView() {
-        img.image = UIImage(named: "noimage")
+        self.selectionStyle = .gray
         img.layer.cornerRadius = 5
         lbName.numberOfLines = 2
     }
     
     func setData(product: Product) {
+        
         self.lbName.text = product.name
+        img.image = UIImage(named: "noimage")
         if !product.images.isEmpty {
            self.img.loadImageByURL(urlString: product.images[0].full_path)
         }
@@ -295,7 +296,7 @@ class ProductListCell: UITableViewCell {
         lbName.text = nil
         lbNumberOfVariants.text = nil
         lbQuantity.text = nil
-        img.image = UIImage(named: "noimage")
+        img.image = nil
     }
  
     
@@ -314,28 +315,33 @@ class VariantListCell: UITableViewCell {
     }
     
     func setupView() {
+        self.selectionStyle = .gray
         img.layer.cornerRadius = 5
         lbName.numberOfLines = 2
-        img.image = UIImage(named: "noimage")
     }
     
     func setData(variant: Variant) {
+       
         self.lbName.text = variant.name
+        img.image = UIImage(named: "noimage")
         if let images = variant.images {
             if !images.isEmpty {
                 self.img.loadImageByURL(urlString: images[0].full_path)
             }
         }
-        lbOnHand.text = "\(Int(variant.inventories[0].on_hand))"
-        lbPrice.text = "\(Int(variant.variant_retail_price))"
+        lbOnHand.text = variant.inventories[0].on_hand.toString()
+        lbPrice.text = variant.getRetailPrice()
         lbSKU.text = "SKU: \(variant.sku)"
 
     }
     
+    
     override func prepareForReuse() {
-        img.image = UIImage(named: "noimage")
+        img.image = nil
         lbName.text = nil
-        
+        lbSKU.text = nil
+        lbPrice.text = nil
+        lbOnHand.text = nil
     }
     
 }

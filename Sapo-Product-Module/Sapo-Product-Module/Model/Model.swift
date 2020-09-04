@@ -7,29 +7,49 @@
 //
 
 import Foundation
+import UIKit
+
+struct ResultError: Codable {
+    var data_error: DataError
+}
+struct DataError: Codable {
+    var status: Int
+    var errors: [String:String]
+}
 
 struct ResultProduct: Codable {
     var metadata: Metadata
     var products: [Product]
 }
 
+struct ResultBrand: Codable {
+    var metadata: Metadata
+    var brands: [Brand]
+}
+
 struct Metadata: Codable {
     var total: Int
+}
+
+struct Brand: Codable {
+    var name: String?
 }
 
 struct Product: Codable {
     var id: Int
     var status: String
-    var name: String
-    var description: String?
     var brand: String?
-    var category: String?
+    var description: String?
+    var name: String
     var opt1: String?
     var opt2: String?
     var opt3: String?
+    var category_id: Int?
+    var category: String?
+    var variants: [Variant]
     var options: [Option]
     var images: [Image]
-    var variants: [Variant]
+    
     
     init() {
         id = 0
@@ -37,8 +57,9 @@ struct Product: Codable {
         name = ""
         description = ""
         brand = ""
+        category_id = 0
         category = ""
-        opt1 = ""
+        opt1 = "Kích thước"
         opt2 = ""
         opt3 = ""
         options = []
@@ -49,8 +70,8 @@ struct Product: Codable {
 }
 
 struct Option: Codable {
-    var name: String
-    var values: [String]
+    var name: String?
+    var values: [String?]
 }
 
 struct Image: Codable {
@@ -63,37 +84,42 @@ struct Image: Codable {
 }
 
 
-
 struct Variant: Codable{
     
     init() {
         id = 0
         product_id = 0
-        variant_whole_price = 0
+        init_price = 0
+        init_stock = 0
         variant_retail_price = 0
+        variant_whole_price = 0
         variant_import_price = 0
+        description = ""
         name = ""
-        product_name = ""
-        opt1 = nil
+        opt1 = "Mặc định"
         opt2 = nil
         opt3 = nil
-        sku = ""
-        barcode = ""
+        product_name = ""
         status = ""
         sellable = true
+        sku = ""
+        barcode = ""
         taxable = true
-        weight_unit = ""
         weight_value = 0
+        weight_unit = ""
         unit = ""
-        description = ""
-        images = [Image]()
-        inventories = [Inventory(available: 0, on_hand: 0)]
+        inventories = []
+        images = []
+        variant_prices = []
     }
     var id: Int
     var product_id: Int
-    var variant_whole_price: Double
-    var variant_retail_price: Double
-    var variant_import_price: Double
+    var init_price: Double?
+    var init_stock: Double?
+
+    var variant_whole_price: Double?
+    var variant_retail_price: Double?
+    var variant_import_price: Double?
     var name: String
     var product_name: String
     var opt1: String?
@@ -110,6 +136,7 @@ struct Variant: Codable{
     var description: String?
     var images: [Image]?
     var inventories: [Inventory]
+    var variant_prices: [Variant_Price]
     
     func getName() -> String {
         var name = ""
@@ -143,11 +170,67 @@ struct Variant: Codable{
         return "\(intValue)" + unit
     }
     
+    func getRetailPrice() -> String {
+        if let price = self.variant_retail_price {
+            return price.toString()
+        }
+        return "0"
+    }
+    func getWholePrice() -> String {
+        if let price = self.variant_whole_price {
+            return price.toString()
+        }
+        return "0"
+    }
+    func getImportPrice() -> String {
+        if let price = self.variant_import_price {
+            return price.toString()
+        }
+        return "0"
+    }
+    
+}
+
+struct Variant_Price: Codable {
+    
+    init() {
+        value = 0
+        price_list_id = 0
+    }
+    
+    init(id: Int, value: Double) {
+        self.value = value
+        self.price_list_id = id
+    }
+    
+    init(id: Int, value: String) {
+        if let v:Double = Double(value) {
+            self.value = v
+        } else {
+            self.value = 0
+        }
+        self.price_list_id = id
+    }
+    
+    var value: Double
+    var price_list_id: Int
+    
 }
 
 struct Inventory: Codable {
+    init() {
+        location_id = 314486
+     //   init_stock = 0
+        available = 0
+        on_hand = 0
+        incoming = 0
+        onway = 0
+    }
+    var location_id: Int
     var available: Double
     var on_hand: Double
+    var incoming: Double
+    var onway: Double
 }
 
 struct ResultCategory: Codable {
@@ -169,17 +252,43 @@ struct ResultVariantById: Codable {
 }
 
 struct ImageForVariant: Codable {
-    init() {
-        image_id = 0
+
+    init(image_id: Int) {
+        self.image_id = image_id
     }
-    var image_id: Int
+     var image_id: Int
 }
 
 struct ImageForProduct: Codable {
     init() {
         image = Base64(base64: "")
     }
+    
+    init(strbase64: String) {
+        image = Base64(base64: strbase64)
+    }
+    
     var image: Base64
+}
+
+struct ProductPost:Codable {
+    init() {
+        product = Product()
+    }
+    init(product: Product) {
+        self.product = product
+    }
+    var product: Product
+}
+
+struct VariantPost: Codable {
+    init(variant: Variant) {
+        self.variant = variant
+    }
+    init() {
+        variant = Variant()
+    }
+    var variant: Variant
 }
 
 struct Base64: Codable {
@@ -191,32 +300,16 @@ struct Category: Codable {
         id = nil
         name = "Tất cả sản phẩm"
     }
+    init(id: Int?, name: String?) {
+        self.id = id
+        self.name = name ?? ""
+    }
     var id: Int?
     var name: String
 }
 
 
 extension Product {
-    func getPriceInString(mode: Int) -> String {
-        var price = 0
-        if mode == 1 {
-            price = Int(self.variants[0].variant_retail_price)
-        } else {
-            price = Int(self.variants[0].variant_whole_price)
-        }
-        var p: String = ""
-        for i in 0..<"\(price)".count  {
-               
-            if(i != 0 && i%3 == 0) {
-                p.append(".")
-            }
-            
-             p.append("\(price)".reversed()[i])
-        }
-        let rs: String = (String) (p.reversed())
-        return " \(rs) đ "
-    }
-    
     func getBrand() -> String {
         if let brand = self.brand {
             return brand
@@ -235,10 +328,11 @@ extension Product {
     
     func getDescription() -> String {
         if let desc = self.description {
-            return desc
-        } else {
-            return "---"
+            if desc != "" {
+                return desc
+            }
         }
+        return "---"
     }
     
     func getQuantity() -> Int {
@@ -266,4 +360,5 @@ extension Double {
         let rs: String = (String) (p.reversed())
         return rs
     }
+    
 }

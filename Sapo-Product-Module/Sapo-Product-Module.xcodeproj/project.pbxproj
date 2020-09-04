@@ -23,15 +23,20 @@
 		0405755E24DB9CC80089E166 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405755D24DB9CC80089E166 /* NetworkService.swift */; };
 		0405756024DBB3DD0089E166 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405755F24DBB3DD0089E166 /* ProductDetailViewController.swift */; };
 		0405756324DC06D20089E166 /* ProductVariantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405756224DC06D20089E166 /* ProductVariantDetailViewController.swift */; };
-		041717A524EFA7560052D927 /* ListVariantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041717A424EFA7560052D927 /* ListVariantTableViewController.swift */; };
 		041F96CE24F3617C00F393E9 /* SetImageForVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F96CD24F3617C00F393E9 /* SetImageForVariantViewController.swift */; };
 		041F96D024F361A300F393E9 /* AddVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F96CF24F361A300F393E9 /* AddVariantViewController.swift */; };
+		042137BF24FCB6A80036AC58 /* ListBrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042137BE24FCB6A80036AC58 /* ListBrandViewController.swift */; };
+		042137C124FCDFF50036AC58 /* AddOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042137C024FCDFF50036AC58 /* AddOptionView.swift */; };
+		042137E924FF5DB00036AC58 /* ProductAdd_ListVariantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042137E824FF5DB00036AC58 /* ProductAdd_ListVariantViewController.swift */; };
 		04403D4624E6815700DC18AC /* ListCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04403D4524E6815600DC18AC /* ListCategoryViewController.swift */; };
+		0447C27825007ECF00BC61C4 /* LeftImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C27725007ECF00BC61C4 /* LeftImageTextField.swift */; };
+		0447C27A2500949C00BC61C4 /* TextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C2792500949C00BC61C4 /* TextEditViewController.swift */; };
 		0448949E24F50D1E00E47E98 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0448949D24F50D1E00E47E98 /* ImagePicker.swift */; };
-		045CF14024ED2C7F0039F817 /* ProductDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF13F24ED2C7F0039F817 /* ProductDescriptionViewController.swift */; };
 		045CF14324EEAF410039F817 /* ProductMoreInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF14224EEAF410039F817 /* ProductMoreInformationView.swift */; };
 		045CF14524EF63170039F817 /* ProductNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF14424EF63170039F817 /* ProductNameView.swift */; };
 		04616E2B24EFBCFE009DD72A /* ProductInventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04616E2A24EFBCFE009DD72A /* ProductInventoryView.swift */; };
+		046F9C9F24F76900006BC0F7 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F9C9E24F76900006BC0F7 /* CustomTextField.swift */; };
+		0475EC4024F67651002F69CB /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475EC3F24F67651002F69CB /* ImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,15 +58,20 @@
 		0405755D24DB9CC80089E166 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0405755F24DBB3DD0089E166 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		0405756224DC06D20089E166 /* ProductVariantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVariantDetailViewController.swift; sourceTree = "<group>"; };
-		041717A424EFA7560052D927 /* ListVariantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVariantTableViewController.swift; sourceTree = "<group>"; };
 		041F96CD24F3617C00F393E9 /* SetImageForVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetImageForVariantViewController.swift; sourceTree = "<group>"; };
 		041F96CF24F361A300F393E9 /* AddVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVariantViewController.swift; sourceTree = "<group>"; };
+		042137BE24FCB6A80036AC58 /* ListBrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBrandViewController.swift; sourceTree = "<group>"; };
+		042137C024FCDFF50036AC58 /* AddOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOptionView.swift; sourceTree = "<group>"; };
+		042137E824FF5DB00036AC58 /* ProductAdd_ListVariantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAdd_ListVariantViewController.swift; sourceTree = "<group>"; };
 		04403D4524E6815600DC18AC /* ListCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoryViewController.swift; sourceTree = "<group>"; };
+		0447C27725007ECF00BC61C4 /* LeftImageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftImageTextField.swift; sourceTree = "<group>"; };
+		0447C2792500949C00BC61C4 /* TextEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewController.swift; sourceTree = "<group>"; };
 		0448949D24F50D1E00E47E98 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		045CF13F24ED2C7F0039F817 /* ProductDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionViewController.swift; sourceTree = "<group>"; };
 		045CF14224EEAF410039F817 /* ProductMoreInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMoreInformationView.swift; sourceTree = "<group>"; };
 		045CF14424EF63170039F817 /* ProductNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNameView.swift; sourceTree = "<group>"; };
 		04616E2A24EFBCFE009DD72A /* ProductInventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInventoryView.swift; sourceTree = "<group>"; };
+		046F9C9E24F76900006BC0F7 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		0475EC3F24F67651002F69CB /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +148,12 @@
 				0405755F24DBB3DD0089E166 /* ProductDetailViewController.swift */,
 				0405756224DC06D20089E166 /* ProductVariantDetailViewController.swift */,
 				04403D4524E6815600DC18AC /* ListCategoryViewController.swift */,
-				045CF13F24ED2C7F0039F817 /* ProductDescriptionViewController.swift */,
 				041F96CD24F3617C00F393E9 /* SetImageForVariantViewController.swift */,
 				041F96CF24F361A300F393E9 /* AddVariantViewController.swift */,
+				0475EC3F24F67651002F69CB /* ImageViewController.swift */,
+				042137BE24FCB6A80036AC58 /* ListBrandViewController.swift */,
+				042137E824FF5DB00036AC58 /* ProductAdd_ListVariantViewController.swift */,
+				0447C2792500949C00BC61C4 /* TextEditViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -150,8 +163,10 @@
 			children = (
 				045CF14224EEAF410039F817 /* ProductMoreInformationView.swift */,
 				045CF14424EF63170039F817 /* ProductNameView.swift */,
-				041717A424EFA7560052D927 /* ListVariantTableViewController.swift */,
 				04616E2A24EFBCFE009DD72A /* ProductInventoryView.swift */,
+				046F9C9E24F76900006BC0F7 /* CustomTextField.swift */,
+				042137C024FCDFF50036AC58 /* AddOptionView.swift */,
+				0447C27725007ECF00BC61C4 /* LeftImageTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,23 +245,28 @@
 				045CF14324EEAF410039F817 /* ProductMoreInformationView.swift in Sources */,
 				0405755E24DB9CC80089E166 /* NetworkService.swift in Sources */,
 				0405755924DAB2190089E166 /* Model.swift in Sources */,
+				042137C124FCDFF50036AC58 /* AddOptionView.swift in Sources */,
 				0405753E24DA987B0089E166 /* ViewController.swift in Sources */,
 				0405753A24DA987B0089E166 /* AppDelegate.swift in Sources */,
+				0447C27825007ECF00BC61C4 /* LeftImageTextField.swift in Sources */,
 				0405755624DAAA510089E166 /* ProductCheckViewController.swift in Sources */,
+				0475EC4024F67651002F69CB /* ImageViewController.swift in Sources */,
 				0405756024DBB3DD0089E166 /* ProductDetailViewController.swift in Sources */,
 				0448949E24F50D1E00E47E98 /* ImagePicker.swift in Sources */,
 				0405755424DAAA420089E166 /* ProductImportViewController.swift in Sources */,
 				0405755024DA9E080089E166 /* ProductListViewController.swift in Sources */,
-				041717A524EFA7560052D927 /* ListVariantTableViewController.swift in Sources */,
+				042137E924FF5DB00036AC58 /* ProductAdd_ListVariantViewController.swift in Sources */,
 				0405753C24DA987B0089E166 /* SceneDelegate.swift in Sources */,
 				0405755224DA9EA50089E166 /* ProductAddViewController.swift in Sources */,
 				04616E2B24EFBCFE009DD72A /* ProductInventoryView.swift in Sources */,
 				0405755C24DAB8FC0089E166 /* Utilities.swift in Sources */,
+				0447C27A2500949C00BC61C4 /* TextEditViewController.swift in Sources */,
 				0405756324DC06D20089E166 /* ProductVariantDetailViewController.swift in Sources */,
 				04403D4624E6815700DC18AC /* ListCategoryViewController.swift in Sources */,
-				045CF14024ED2C7F0039F817 /* ProductDescriptionViewController.swift in Sources */,
 				045CF14524EF63170039F817 /* ProductNameView.swift in Sources */,
+				046F9C9F24F76900006BC0F7 /* CustomTextField.swift in Sources */,
 				041F96D024F361A300F393E9 /* AddVariantViewController.swift in Sources */,
+				042137BF24FCB6A80036AC58 /* ListBrandViewController.swift in Sources */,
 				0405754E24DA999D0089E166 /* ProductHomeViewController.swift in Sources */,
 				041F96CE24F3617C00F393E9 /* SetImageForVariantViewController.swift in Sources */,
 			);
@@ -395,6 +415,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MM257LS464;
 				INFOPLIST_FILE = "Sapo-Product-Module/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -413,6 +434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MM257LS464;
 				INFOPLIST_FILE = "Sapo-Product-Module/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

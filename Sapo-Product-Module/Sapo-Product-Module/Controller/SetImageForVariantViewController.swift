@@ -39,7 +39,7 @@ class SetImageForVariantViewController: UIViewController, UICollectionViewDataSo
     var product_id: Int = 0
     var images = [Image]()
     
-    var delegate: SetImageForVariant?
+    var delegate: SetImageForVariantDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,7 @@ class SetImageForVariantViewController: UIViewController, UICollectionViewDataSo
     }
     
     func setupView() {
+        self.title = "Chọn ảnh"
         view.backgroundColor = .systemGray6
     }
     
@@ -59,8 +60,7 @@ class SetImageForVariantViewController: UIViewController, UICollectionViewDataSo
     }
     
     func loadImages() {
-        NetworkService.shared.setProductId(product_id: product_id)
-        NetworkService.shared.getProductById(onSucess: { (rs) in
+        NetworkService.shared.getProductById(product_id: product_id, onSucess: { (rs) in
             self.images = rs.product.images
             self.updateView()
         }) { (err) in
@@ -70,6 +70,6 @@ class SetImageForVariantViewController: UIViewController, UICollectionViewDataSo
 
 }
 
-protocol SetImageForVariant {
+protocol SetImageForVariantDelegate {
     func setImage(image: Image)
 }
